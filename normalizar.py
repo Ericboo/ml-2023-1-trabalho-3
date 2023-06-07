@@ -20,7 +20,7 @@ class Pre_processamento:
         dados['company_size'] = dados['company_size'].map(self.company_size_id)
         return dados
     
-    def drop_too_little_data(self, dados, col):
+    def drop_too_little_data(self, dados, col, min_val):
         job_title_counts = dados[col].value_counts()
-        job_titles_to_drop = job_title_counts[job_title_counts < 10].index
+        job_titles_to_drop = job_title_counts[job_title_counts < min_val].index
         return dados[~dados[col].isin(job_titles_to_drop)]
